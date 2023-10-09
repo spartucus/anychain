@@ -273,8 +273,8 @@ impl FromStr for MinaTransaction {
 mod tests {
     use super::{MEMO_BYTES, TAG_BITS};
     use crate::signature::Signature;
+    use crate::{create_legacy, Keypair, MinaSecretKey, NetworkId, Signer};
     use crate::{public_key::CompressedPubKey, MinaTransaction, MinaTransactionParameters};
-    use crate::{Keypair, create_legacy, NetworkId, MinaSecretKey, Signer};
 
     fn sign(sk: &MinaSecretKey, tx: &MinaTransactionParameters) -> Signature {
         let kp = Keypair::from_secret_key(sk.clone()).unwrap();
@@ -285,8 +285,8 @@ mod tests {
     #[test]
     fn test() {
         let sk = [
-            1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-            1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+            1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+            1, 1, 1,
         ];
         let sk = MinaSecretKey::from_bytes(&sk).unwrap();
 

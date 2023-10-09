@@ -9,7 +9,7 @@ pub mod bip39;
 pub mod crypto;
 pub mod error;
 
-use anychain_mina::{Keypair, Signer, Signature};
+use anychain_mina::{Keypair, Signature, Signer};
 use error::Error;
 
 pub fn secp256k1_sign(

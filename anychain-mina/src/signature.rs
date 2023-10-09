@@ -46,6 +46,11 @@ impl fmt::Display for Signature {
         rx_bytes.reverse();
         s_bytes.reverse();
 
-        write!(f, "field: {}, scalar: {}", hex::encode(rx_bytes), hex::encode(s_bytes))
+        write!(
+            f,
+            "field: {}, scalar: {}",
+            hex::encode(rx_bytes),
+            hex::encode(s_bytes)
+        )
     }
 }
