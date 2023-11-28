@@ -2,15 +2,6 @@
 resolver = "2"
 members = [
     "anychain-core",
-    "anychain-bitcoin",
-    "anychain-ethereum",
-    "anychain-tron",
-    "anychain-filecoin",
-    "anychain-polkadot",
-    "anychain-ripple",
-    "anychain-neo",
-    "anychain-kms",
-    "examples/*"
 ]
 
 [workspace.package]
