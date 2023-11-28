@@ -14,7 +14,7 @@ repository = "https://github.com/0xcregis/anychain"
 [workspace.dependencies]
 sha3 = "0.10.1"
 thiserror = "1.0"
-ethereum-types = "0.13.1"
+#ethereum-types = "0.13.1"
 ripemd = "0.1.1"
 blake2b_simd = "1.0.0"
 bech32 = "0.9.0"
@@ -27,37 +27,37 @@ rand_core = { version = "0.6.3", default-features = false }
 rlp = { version = "0.5.2", features = ["derive"] }
 serde_json = { version = "1.0", default-features = false, features = ["alloc"] }
 sha2 = { version = "0.10.2", default-features = false }
-serde = { version = "1.0", default-features = false, features = ["alloc", "derive"] }
-fvm_shared = "3.3.1"
-data-encoding = "2.3.2"
-data-encoding-macro = "0.1.12"
-fvm_ipld_encoding = "0.2.2"
-num-derive = "0.3.3"
-num-traits = "0.2.15"
-lazy_static = "1.4.0"
-unsigned-varint = "0.7.1"
-num-bigint = "0.4.3"
-anyhow = "1.0.75"
-forest_encoding = "0.2.2"
-cid = "0.8.6"
-base64 = "0.21.5"
-bytes = "1.0"
-protobuf = { version = "3.3.0" }
-chrono = "0.4"
-ethabi = "17.2.0"
-regex = { version = "1.3" }
-clap = { version = "4.4.7", features = ["derive"] }
-primitive-types = { version = "0.11.1", features = ["rlp"] }
-rustc-hash = "1.1.0"
-hmac = "0.12.1"
-bs58 = { version = "0.4", default-features = false, features = ["check"] }
-pbkdf2 = { version = "0.12.1", default-features = false }
-unicode-normalization = "0.1.22"
-zeroize = { version = "1.5.5", default-features = false }
-once_cell = { version = "1.18.0" }
-subtle = { version = "2", default-features = false }
-encoding = "0.2.33"
-p256 = "0.13.2"
+#serde = { version = "1.0", default-features = false, features = ["alloc", "derive"] }
+#fvm_shared = "3.3.1"
+#data-encoding = "2.3.2"
+#data-encoding-macro = "0.1.12"
+#fvm_ipld_encoding = "0.2.2"
+#num-derive = "0.3.3"
+#num-traits = "0.2.15"
+#lazy_static = "1.4.0"
+#unsigned-varint = "0.7.1"
+#num-bigint = "0.4.3"
+#anyhow = "1.0.75"
+#forest_encoding = "0.2.2"
+#cid = "0.8.6"
+#base64 = "0.21.5"
+#bytes = "1.0"
+#protobuf = { version = "3.3.0" }
+#chrono = "0.4"
+#ethabi = "17.2.0"
+#regex = { version = "1.3" }
+#clap = { version = "4.4.7", features = ["derive"] }
+#primitive-types = { version = "0.11.1", features = ["rlp"] }
+#rustc-hash = "1.1.0"
+#hmac = "0.12.1"
+#bs58 = { version = "0.4", default-features = false, features = ["check"] }
+#pbkdf2 = { version = "0.12.1", default-features = false }
+#unicode-normalization = "0.1.22"
+#zeroize = { version = "1.5.5", default-features = false }
+#once_cell = { version = "1.18.0" }
+#subtle = { version = "2", default-features = false }
+#encoding = "0.2.33"
+#p256 = "0.13.2"
 
 [profile.release]
 strip = true       # Automatically strip symbols from the binary
