@@ -22,7 +22,7 @@ bech32 = { workspace = true }
 hex = { workspace = true }
 libsecp256k1 = { workspace = true }
 # bls-signatures = { workspace = true }
-base58 = { workspace = true , optional = true }
+base58 = { workspace = true }
 rand = { workspace = true }
 rand_core = { workspace = true }
 rlp = { workspace = true }
@@ -31,4 +31,4 @@ sha2 = { workspace = true }
 
 [features]
 default = ["std"]
-std = ["base58"]
+std = []
