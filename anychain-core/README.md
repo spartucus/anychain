@@ -24,18 +24,6 @@ extern crate anychain_core;
 
 ## Usage
 
-Here's a basic example of how to use anychain-core to interact with an Ethereum blockchain:
-```rust
-use anychain_core::{Blockchain, Ethereum};
-
-fn main() {
-    let eth = Ethereum::new("https://mainnet.infura.io/v3/YOUR-API-KEY");
-
-    let balance = eth.get_balance("0x742d35Cc6634C0532925a3b844Bc454e4438f44e").unwrap();
-    println!("Balance: {}", balance);
-}
-```
-
 For more examples and usage details, please refer to the [documentation](https://docs.rs/anychain-core).
 
 ## Contributing
