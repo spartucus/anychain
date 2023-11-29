@@ -13,7 +13,8 @@ repository = "https://github.com/0xcregis/anychain"
 
 [workspace.dependencies]
 sha3 = "0.10.1"
-thiserror = "1.0"
+#thiserror = "1.0"
+thiserror = { version = "1.0", package = "thiserror-core", default-features = false }
 #ethereum-types = "0.13.1"
 ripemd = "0.1.1"
 blake2b_simd = "1.0.0"
