@@ -24,18 +24,16 @@ pub enum Error {
     #[error("Invalid Format: {0:}")]
     InvalidFormat(#[from] FormatError),
 
-    #[error("io error: {0:}")]
-    Io(#[from] ::std::io::Error),
-
-    #[error("fmt error: {0:}")]
-    Fmt(#[from] ::std::fmt::Error),
-
+    // #[error("io error: {0:}")]
+    // Io(#[from] ::std::io::Error),
+    //
+    // #[error("fmt error: {0:}")]
+    // Fmt(#[from] ::std::fmt::Error),
     #[error("fromHex error: {0:}")]
     FromHex(#[from] ::hex::FromHexError),
 
     #[error("parsing error: {0:}")]
     ParseInt(#[from] ::std::num::ParseIntError),
-
-    #[error("secp265k1 error: {0:}")]
-    Secp256k1Error(#[from] ::libsecp256k1::Error),
+    // #[error("secp265k1 error: {0:}")]
+    // Secp256k1Error(#[from] ::libsecp256k1::Error),
 }
