@@ -1,3 +1,4 @@
+use crate::no_std::Vec;
 use ripemd::Ripemd160;
 use sha2::{Digest, Sha256, Sha512};
 use sha3::Keccak256;
@@ -43,22 +44,23 @@ pub fn blake2b_160(input: &[u8]) -> [u8; 20] {
 /// Returns a 32-byte hash for given data
 #[inline]
 pub fn blake2b_256(ingest: &[u8]) -> [u8; 32] {
-    let digest = blake2b_simd::Params::new()
-        .hash_length(32)
-        .to_state()
-        .update(ingest)
-        .finalize();
+    let digest =
+        blake2b_simd::Params::new()
+            .hash_length(32)
+            .to_state()
+            .update(ingest)
+            .finalize();
 
     let mut hash = [0u8; 32];
     hash.clone_from_slice(digest.as_bytes());
     hash
 }
 
-pub fn checksum(data: &[u8]) -> Vec<u8> {
+pub fn checksum(data: &[u8]) -> crate::no_std::Vec<u8> {
     Sha256::digest(Sha256::digest(data)).to_vec()
 }
 
-pub fn hash160(bytes: &[u8]) -> Vec<u8> {
+pub fn hash160(bytes: &[u8]) -> crate::no_std::Vec<u8> {
     Ripemd160::digest(Sha256::digest(bytes)).to_vec()
 }
 
