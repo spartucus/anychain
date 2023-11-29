@@ -23,10 +23,9 @@ pub enum AmountError {
 }
 
 /// Converts any available denomination to the minimum denomination
-pub fn to_basic_unit(value: &str, mut denomination: u32) -> String {
+pub fn to_basic_unit(value: &str, mut denomination: u32) -> Result<String, String> {
     if denomination > 18 {
-        println!("illegal denomination");
-        return "".to_string();
+        return Err("illegal denomination".to_string());
     }
 
     let mut has_point: bool = false;
@@ -37,20 +36,18 @@ pub fn to_basic_unit(value: &str, mut denomination: u32) -> String {
         if c.is_ascii_digit() || c == '.' {
             if c == '.' {
                 if has_point {
-                    println!("duplicate decimal point");
-                    return "".to_string();
+                    return Err("duplicate decimal point".to_string());
                 }
                 if cnt == 0 {
                     // the decimal point is at the front, indicating the value is 0
-                    return "0".to_string();
+                    return Ok("0".to_string());
                 }
                 has_point = true;
                 point = cnt;
             }
             cnt += 1;
         } else {
-            println!("illegal decimal string");
-            return "".to_string();
+            return Err("illegal decimal string".to_string());
         }
     }
 
@@ -86,11 +83,11 @@ pub fn to_basic_unit(value: &str, mut denomination: u32) -> String {
     }
 
     v.truncate(point);
-    String::from_utf8(v).unwrap()
+    Ok(String::from_utf8(v).unwrap())
 }
 
 #[test]
 fn test() {
     let s = to_basic_unit("0.0001037910", 7);
-    println!("s = {}", s);
+    assert_eq!("00001038", s);
 }
