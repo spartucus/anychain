@@ -95,11 +95,11 @@ impl From<PublicKeyError> for AddressError {
     }
 }
 
-impl From<base58::FromBase58Error> for AddressError {
-    fn from(error: base58::FromBase58Error) -> Self {
-        AddressError::Crate("base58", format!("{:?}", error))
-    }
-}
+// impl From<base58::FromBase58Error> for AddressError {
+//     fn from(error: base58::FromBase58Error) -> Self {
+//         AddressError::Crate("base58", format!("{:?}", error))
+//     }
+// }
 
 impl From<bech32::Error> for AddressError {
     fn from(error: bech32::Error) -> Self {
@@ -113,11 +113,11 @@ impl From<core::str::Utf8Error> for AddressError {
     }
 }
 
-impl From<hex::FromHexError> for AddressError {
-    fn from(error: hex::FromHexError) -> Self {
-        AddressError::Crate("hex", format!("{:?}", error))
-    }
-}
+// impl From<hex::FromHexError> for AddressError {
+//     fn from(error: hex::FromHexError) -> Self {
+//         AddressError::Crate("hex", format!("{:?}", error))
+//     }
+// }
 
 impl From<rand_core::Error> for AddressError {
     fn from(error: rand_core::Error) -> Self {

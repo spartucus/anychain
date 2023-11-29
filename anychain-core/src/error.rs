@@ -40,9 +40,8 @@ pub enum Error {
     #[error("fmt error: {0:}")]
     Fmt(#[from] ::core::fmt::Error),
 
-    #[error("fromHex error: {0:}")]
-    FromHex(#[from] ::hex::FromHexError),
-
+    // #[error("fromHex error: {0:}")]
+    // FromHex(#[from] ::hex::FromHexError),
     #[cfg(feature = "std")]
     #[error("parsing error: {0:}")]
     ParseInt(#[from] ::std::num::ParseIntError),

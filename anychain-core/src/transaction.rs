@@ -168,11 +168,11 @@ impl From<()> for TransactionError {
     }
 }
 
-impl From<base58::FromBase58Error> for TransactionError {
-    fn from(error: base58::FromBase58Error) -> Self {
-        TransactionError::Crate("base58", format!("{:?}", error))
-    }
-}
+// impl From<base58::FromBase58Error> for TransactionError {
+//     fn from(error: base58::FromBase58Error) -> Self {
+//         TransactionError::Crate("base58", format!("{:?}", error))
+//     }
+// }
 
 impl From<bech32::Error> for TransactionError {
     fn from(error: bech32::Error) -> Self {
@@ -192,11 +192,11 @@ impl From<core::str::ParseBoolError> for TransactionError {
     }
 }
 
-impl From<hex::FromHexError> for TransactionError {
-    fn from(error: hex::FromHexError) -> Self {
-        TransactionError::Crate("hex", format!("{:?}", error))
-    }
-}
+// impl From<hex::FromHexError> for TransactionError {
+//     fn from(error: hex::FromHexError) -> Self {
+//         TransactionError::Crate("hex", format!("{:?}", error))
+//     }
+// }
 
 impl From<rlp::DecoderError> for TransactionError {
     fn from(error: rlp::DecoderError) -> Self {

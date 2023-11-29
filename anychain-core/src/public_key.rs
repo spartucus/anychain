@@ -46,11 +46,11 @@ impl From<crate::no_std::io::Error> for PublicKeyError {
     }
 }
 
-impl From<base58::FromBase58Error> for PublicKeyError {
-    fn from(error: base58::FromBase58Error) -> Self {
-        PublicKeyError::Crate("base58", format!("{:?}", error))
-    }
-}
+// impl From<base58::FromBase58Error> for PublicKeyError {
+//     fn from(error: base58::FromBase58Error) -> Self {
+//         PublicKeyError::Crate("base58", format!("{:?}", error))
+//     }
+// }
 
 impl From<bech32::Error> for PublicKeyError {
     fn from(error: bech32::Error) -> Self {
@@ -58,11 +58,11 @@ impl From<bech32::Error> for PublicKeyError {
     }
 }
 
-impl From<hex::FromHexError> for PublicKeyError {
-    fn from(error: hex::FromHexError) -> Self {
-        PublicKeyError::Crate("hex", format!("{:?}", error))
-    }
-}
+// impl From<hex::FromHexError> for PublicKeyError {
+//     fn from(error: hex::FromHexError) -> Self {
+//         PublicKeyError::Crate("hex", format!("{:?}", error))
+//     }
+// }
 
 impl From<libsecp256k1::Error> for PublicKeyError {
     fn from(error: libsecp256k1::Error) -> Self {

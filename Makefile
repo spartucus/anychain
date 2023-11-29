@@ -28,3 +28,7 @@ build-linux-server:
 build-ios:
 	rustup target add aarch64-apple-ios
 	cargo build --release --target aarch64-apple-ios
+
+build-stm32:
+	cargo build --no-default-features --target thumbv7em-none-eabihf
+
