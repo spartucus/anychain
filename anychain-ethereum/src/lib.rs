@@ -24,6 +24,9 @@ pub use self::public_key::*;
 pub mod transaction;
 pub use self::transaction::*;
 
+mod no_std;
+pub use self::no_std::*;
+
 #[cfg(test)]
 mod test_mod {
 

@@ -1,8 +1,12 @@
 use anychain_core::{to_basic_unit as to_wei, Amount, AmountError};
 
-use anychain_core::ethereum_types::U256;
 use core::fmt;
+use ethereum_types::U256;
 use serde::{Deserialize, Serialize};
+
+#[cfg(not(feature = "std"))]
+use core::ops::{Add, Sub};
+#[cfg(feature = "std")]
 use std::ops::{Add, Sub};
 
 /// Represents the amount of Ethereum in wei
@@ -58,7 +62,9 @@ impl EthereumAmount {
     pub fn u256_from_str(val: &str) -> Result<U256, AmountError> {
         match U256::from_dec_str(val) {
             Ok(wei) => Ok(wei),
-            Err(error) => Err(AmountError::Crate("uint", format!("{:?}", error))),
+            Err(error) => Err(
+                AmountError::Crate("uint", anychain_core::no_std::format!("{:?}", error))
+            ),
         }
     }
 
@@ -74,42 +80,42 @@ impl EthereumAmount {
 
     pub fn from_kwei(kwei_value: &str) -> Result<Self, AmountError> {
         let wei_value = to_wei(kwei_value, Denomination::Kwei.precision());
-        let wei = Self::u256_from_str(&wei_value)?;
+        let wei = Self::u256_from_str(&wei_value.unwrap())?;
 
         Ok(Self::from_u256(wei))
     }
 
     pub fn from_mwei(mwei_value: &str) -> Result<Self, AmountError> {
         let wei_value = to_wei(mwei_value, Denomination::Mwei.precision());
-        let wei = Self::u256_from_str(&wei_value)?;
+        let wei = Self::u256_from_str(&wei_value.unwrap())?;
 
         Ok(Self::from_u256(wei))
     }
 
     pub fn from_gwei(gwei_value: &str) -> Result<Self, AmountError> {
         let wei_value = to_wei(gwei_value, Denomination::Gwei.precision());
-        let wei = Self::u256_from_str(&wei_value)?;
+        let wei = Self::u256_from_str(&wei_value.unwrap())?;
 
         Ok(Self::from_u256(wei))
     }
 
     pub fn from_szabo(szabo_value: &str) -> Result<Self, AmountError> {
         let wei_value = to_wei(szabo_value, Denomination::Szabo.precision());
-        let wei = Self::u256_from_str(&wei_value)?;
+        let wei = Self::u256_from_str(&wei_value.unwrap())?;
 
         Ok(Self::from_u256(wei))
     }
 
     pub fn from_finney(finney_value: &str) -> Result<Self, AmountError> {
         let wei_value = to_wei(finney_value, Denomination::Finney.precision());
-        let wei = Self::u256_from_str(&wei_value)?;
+        let wei = Self::u256_from_str(&wei_value.unwrap())?;
 
         Ok(Self::from_u256(wei))
     }
 
     pub fn from_eth(eth_value: &str) -> Result<Self, AmountError> {
         let wei_value = to_wei(eth_value, Denomination::Ether.precision());
-        let wei = Self::u256_from_str(&wei_value)?;
+        let wei = Self::u256_from_str(&wei_value.unwrap())?;
 
         Ok(Self::from_u256(wei))
     }

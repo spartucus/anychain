@@ -1,8 +1,8 @@
 use crate::network::EthereumNetwork;
 use anychain_core::{Network, NetworkError};
 
+use crate::no_std::{fmt, FromStr};
 use serde::Serialize;
-use std::{fmt, str::FromStr};
 
 /// Represents an ARB mainnet
 #[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Serialize)]

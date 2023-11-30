@@ -3,13 +3,17 @@ use crate::amount::EthereumAmount;
 use crate::format::EthereumFormat;
 use crate::network::EthereumNetwork;
 use crate::public_key::EthereumPublicKey;
-use anychain_core::ethereum_types::U256;
+use anychain_core::no_std::*;
 use anychain_core::utilities::crypto::keccak256;
 use anychain_core::{hex, libsecp256k1, PublicKey, Transaction, TransactionError, TransactionId};
+#[cfg(not(feature = "std"))]
+use core::convert::TryInto;
 use core::{fmt, marker::PhantomData, str::FromStr};
 use ethabi::ethereum_types::H160;
 use ethabi::{Function, Param, ParamType, StateMutability, Token};
+use ethereum_types::U256;
 use rlp::{decode_list, RlpStream};
+#[cfg(feature = "std")]
 use std::convert::TryInto;
 
 /// Trim the leading zeros of a byte stream and return it
@@ -147,13 +151,14 @@ impl<N: EthereumNetwork> Transaction for EthereumTransaction<N> {
             &recovery_id,
         )?);
         self.sender = Some(public_key.to_address(&EthereumFormat::Standard)?);
-        self.signature = Some(EthereumTransactionSignature {
-            v: (u32::from(recid) + N::CHAIN_ID * 2 + 35)
-                .to_be_bytes()
-                .to_vec(), // EIP155
-            r: rs[..32].to_vec(),
-            s: rs[32..64].to_vec(),
-        });
+        self.signature =
+            Some(EthereumTransactionSignature {
+                v: (u32::from(recid) + N::CHAIN_ID * 2 + 35)
+                    .to_be_bytes()
+                    .to_vec(), // EIP155
+                r: rs[..32].to_vec(),
+                s: rs[32..64].to_vec(),
+            });
         self.to_bytes()
     }
 
@@ -165,26 +170,27 @@ impl<N: EthereumNetwork> Transaction for EthereumTransaction<N> {
             return Err(TransactionError::InvalidRlpLength(list.len()));
         }
 
-        let parameters = EthereumTransactionParameters {
-            receiver: EthereumAddress::from_str(&hex::encode(&list[3]))?,
-            amount: match list[4].is_empty() {
-                true => EthereumAmount::from_u256(U256::zero()),
-                false => EthereumAmount::from_u256(U256::from(list[4].as_slice())),
-            },
-            gas: match list[2].is_empty() {
-                true => U256::zero(),
-                false => U256::from(list[2].as_slice()),
-            },
-            gas_price: match list[1].is_empty() {
-                true => EthereumAmount::from_u256(U256::zero()),
-                false => EthereumAmount::from_u256(U256::from(list[1].as_slice())),
-            },
-            nonce: match list[0].is_empty() {
-                true => U256::zero(),
-                false => U256::from(list[0].as_slice()),
-            },
-            data: list[5].clone(),
-        };
+        let parameters =
+            EthereumTransactionParameters {
+                receiver: EthereumAddress::from_str(&hex::encode(&list[3]))?,
+                amount: match list[4].is_empty() {
+                    true => EthereumAmount::from_u256(U256::zero()),
+                    false => EthereumAmount::from_u256(U256::from(list[4].as_slice())),
+                },
+                gas: match list[2].is_empty() {
+                    true => U256::zero(),
+                    false => U256::from(list[2].as_slice()),
+                },
+                gas_price: match list[1].is_empty() {
+                    true => EthereumAmount::from_u256(U256::zero()),
+                    false => EthereumAmount::from_u256(U256::from(list[1].as_slice())),
+                },
+                nonce: match list[0].is_empty() {
+                    true => U256::zero(),
+                    false => U256::from(list[0].as_slice()),
+                },
+                data: list[5].clone(),
+            };
 
         match list[7].is_empty() && list[8].is_empty() {
             true => {
@@ -209,20 +215,22 @@ impl<N: EthereumNetwork> Transaction for EthereumTransaction<N> {
                 let mut s = list[8].clone();
                 pad_zeros(&mut s, 32);
                 let signature = [r.clone(), s.clone()].concat();
-                let raw_transaction = Self {
-                    sender: None,
-                    parameters: parameters.clone(),
-                    signature: None,
-                    _network: PhantomData,
-                };
+                let raw_transaction =
+                    Self {
+                        sender: None,
+                        parameters: parameters.clone(),
+                        signature: None,
+                        _network: PhantomData,
+                    };
                 let message =
                     libsecp256k1::Message::parse_slice(&raw_transaction.to_transaction_id()?.txid)?;
-                let public_key =
-                    EthereumPublicKey::from_secp256k1_public_key(libsecp256k1::recover(
+                let public_key = EthereumPublicKey::from_secp256k1_public_key(
+                    libsecp256k1::recover(
                         &message,
                         &libsecp256k1::Signature::parse_standard_slice(signature.as_slice())?,
                         &recovery_id,
-                    )?);
+                    )?,
+                );
 
                 Ok(Self {
                     sender: Some(public_key.to_address(&EthereumFormat::Standard)?),

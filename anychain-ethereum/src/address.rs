@@ -1,9 +1,9 @@
 use crate::format::EthereumFormat;
 use crate::public_key::EthereumPublicKey;
-use anychain_core::{libsecp256k1, to_hex_string, Address, AddressError, Error, PublicKey};
-
 use anychain_core::hex;
+use anychain_core::no_std::*;
 use anychain_core::utilities::crypto::keccak256;
+use anychain_core::{libsecp256k1, to_hex_string, Address, AddressError, Error, PublicKey};
 use core::{convert::TryFrom, fmt, str::FromStr};
 use regex::Regex;
 use serde::{Deserialize, Serialize};
@@ -146,28 +146,29 @@ mod tests {
     mod checksum_address {
         use super::*;
 
-        const KEYPAIRS: [(&str, &str); 5] = [
-            (
-                "f89f23eaeac18252fedf81bb8318d3c111d48c19b0680dcf6e0a8d5136caf287",
-                "0x9141B7539E7902872095C408BfA294435e2b8c8a",
-            ),
-            (
-                "a93701ea343247db13466f6448ffbca658726e2b4a77530db3eca3c9250b4f0d",
-                "0xa0967B1F698DC497A694FE955666D1dDd398145C",
-            ),
-            (
-                "de61e35e2e5eb9504d52f5042126591d80144d49f74b8ced68f4959a3e8edffd",
-                "0xD5d13d1dD277BB9041e560A63ee29c086D370b0A",
-            ),
-            (
-                "56f01d5e01b6fd1cc123d8d1eae0d148e00c025b5be2ef624775f7a1b802e9c1",
-                "0xc4488ebbE882fa2aF1D466CB2C8ecafE316c067a",
-            ),
-            (
-                "363af8b4d3ff22bb0e4ffc2ff198b4b5be0316f8a507ad5fe32f021c3d1ae8ad",
-                "0xF9001e6AEE6EA439D713fBbF960EbA76f4770E2B",
-            ),
-        ];
+        const KEYPAIRS: [(&str, &str); 5] =
+            [
+                (
+                    "f89f23eaeac18252fedf81bb8318d3c111d48c19b0680dcf6e0a8d5136caf287",
+                    "0x9141B7539E7902872095C408BfA294435e2b8c8a",
+                ),
+                (
+                    "a93701ea343247db13466f6448ffbca658726e2b4a77530db3eca3c9250b4f0d",
+                    "0xa0967B1F698DC497A694FE955666D1dDd398145C",
+                ),
+                (
+                    "de61e35e2e5eb9504d52f5042126591d80144d49f74b8ced68f4959a3e8edffd",
+                    "0xD5d13d1dD277BB9041e560A63ee29c086D370b0A",
+                ),
+                (
+                    "56f01d5e01b6fd1cc123d8d1eae0d148e00c025b5be2ef624775f7a1b802e9c1",
+                    "0xc4488ebbE882fa2aF1D466CB2C8ecafE316c067a",
+                ),
+                (
+                    "363af8b4d3ff22bb0e4ffc2ff198b4b5be0316f8a507ad5fe32f021c3d1ae8ad",
+                    "0xF9001e6AEE6EA439D713fBbF960EbA76f4770E2B",
+                ),
+            ];
 
         #[test]
         fn from_str() {
