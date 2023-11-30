@@ -80,7 +80,7 @@ impl EthereumAmount {
 
     pub fn from_kwei(kwei_value: &str) -> Result<Self, AmountError> {
         let wei_value = to_wei(kwei_value, Denomination::Kwei.precision())
-            .map_err(|e| AmountError::InvalidAmount(e))?;
+            .map_err(AmountError::InvalidAmount)?;
         let wei = Self::u256_from_str(&wei_value)?;
 
         Ok(Self::from_u256(wei))
@@ -88,7 +88,7 @@ impl EthereumAmount {
 
     pub fn from_mwei(mwei_value: &str) -> Result<Self, AmountError> {
         let wei_value = to_wei(mwei_value, Denomination::Mwei.precision())
-            .map_err(|e| AmountError::InvalidAmount(e))?;
+            .map_err(AmountError::InvalidAmount)?;
         let wei = Self::u256_from_str(&wei_value)?;
 
         Ok(Self::from_u256(wei))
@@ -96,7 +96,7 @@ impl EthereumAmount {
 
     pub fn from_gwei(gwei_value: &str) -> Result<Self, AmountError> {
         let wei_value = to_wei(gwei_value, Denomination::Gwei.precision())
-            .map_err(|e| AmountError::InvalidAmount(e))?;
+            .map_err(AmountError::InvalidAmount)?;
         let wei = Self::u256_from_str(&wei_value)?;
 
         Ok(Self::from_u256(wei))
@@ -104,7 +104,7 @@ impl EthereumAmount {
 
     pub fn from_szabo(szabo_value: &str) -> Result<Self, AmountError> {
         let wei_value = to_wei(szabo_value, Denomination::Szabo.precision())
-            .map_err(|e| AmountError::InvalidAmount(e))?;
+            .map_err(AmountError::InvalidAmount)?;
         let wei = Self::u256_from_str(&wei_value)?;
 
         Ok(Self::from_u256(wei))
@@ -112,7 +112,7 @@ impl EthereumAmount {
 
     pub fn from_finney(finney_value: &str) -> Result<Self, AmountError> {
         let wei_value = to_wei(finney_value, Denomination::Finney.precision())
-            .map_err(|e| AmountError::InvalidAmount(e))?;
+            .map_err(AmountError::InvalidAmount)?;
         let wei = Self::u256_from_str(&wei_value)?;
 
         Ok(Self::from_u256(wei))
@@ -120,7 +120,7 @@ impl EthereumAmount {
 
     pub fn from_eth(eth_value: &str) -> Result<Self, AmountError> {
         let wei_value = to_wei(eth_value, Denomination::Ether.precision())
-            .map_err(|e| AmountError::InvalidAmount(e))?;
+            .map_err(AmountError::InvalidAmount)?;
         let wei = Self::u256_from_str(&wei_value)?;
 
         Ok(Self::from_u256(wei))
