@@ -19,11 +19,10 @@ thiserror = { version = "1.0", package = "thiserror-core", default-features = fa
 ripemd = { version = "0.1.1", default-features = false }
 blake2b_simd = { version = "1.0.0", default-features = false }
 bech32 = { version = "0.9.0", default-features = false }
-# hex = { version = "0.4.3", default-features = false }
-faster-hex = { version = "0.9.0", default-features = false }
+hex = { version = "0.4.3", default-features = false }
+# faster-hex = { version = "0.9.0", default-features = false }
 libsecp256k1 = { version = "0.7.1", default-features = false }
 # bls-signatures = "0.14.0"
-# base58 = { version = "0.2" }
 rand = { version = "0.8.5" , default-features = false }
 rand_core = { version = "0.6.3", default-features = false }
 rlp = { version = "0.5.2", default-features = false, features = ["derive"] }

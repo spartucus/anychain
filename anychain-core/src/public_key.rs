@@ -58,11 +58,11 @@ impl From<bech32::Error> for PublicKeyError {
     }
 }
 
-// impl From<hex::FromHexError> for PublicKeyError {
-//     fn from(error: hex::FromHexError) -> Self {
-//         PublicKeyError::Crate("hex", format!("{:?}", error))
-//     }
-// }
+impl From<hex::FromHexError> for PublicKeyError {
+    fn from(error: hex::FromHexError) -> Self {
+        PublicKeyError::Crate("hex", format!("{:?}", error))
+    }
+}
 
 impl From<libsecp256k1::Error> for PublicKeyError {
     fn from(error: libsecp256k1::Error) -> Self {

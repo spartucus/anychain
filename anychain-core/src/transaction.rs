@@ -192,11 +192,11 @@ impl From<core::str::ParseBoolError> for TransactionError {
     }
 }
 
-// impl From<hex::FromHexError> for TransactionError {
-//     fn from(error: hex::FromHexError) -> Self {
-//         TransactionError::Crate("hex", format!("{:?}", error))
-//     }
-// }
+impl From<hex::FromHexError> for TransactionError {
+    fn from(error: hex::FromHexError) -> Self {
+        TransactionError::Crate("hex", format!("{:?}", error))
+    }
+}
 
 impl From<rlp::DecoderError> for TransactionError {
     fn from(error: rlp::DecoderError) -> Self {

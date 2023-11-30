@@ -19,11 +19,8 @@ thiserror = { workspace = true }
 ripemd = { workspace = true }
 blake2b_simd = { workspace = true }
 bech32 = { workspace = true }
-# hex = { workspace = true }
-faster-hex = { workspace = true }
+hex = { workspace = true }
 libsecp256k1 = { workspace = true }
-# bls-signatures = { workspace = true }
-# base58 = { workspace = true }
 bs58 = { workspace = true }
 rand = { workspace = true }
 rand_core = { workspace = true }

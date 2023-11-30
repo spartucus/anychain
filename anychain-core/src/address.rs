@@ -113,11 +113,11 @@ impl From<core::str::Utf8Error> for AddressError {
     }
 }
 
-// impl From<hex::FromHexError> for AddressError {
-//     fn from(error: hex::FromHexError) -> Self {
-//         AddressError::Crate("hex", format!("{:?}", error))
-//     }
-// }
+impl From<hex::FromHexError> for AddressError {
+    fn from(error: hex::FromHexError) -> Self {
+        AddressError::Crate("hex", format!("{:?}", error))
+    }
+}
 
 impl From<rand_core::Error> for AddressError {
     fn from(error: rand_core::Error) -> Self {
