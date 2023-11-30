@@ -89,5 +89,5 @@ pub fn to_basic_unit(value: &str, mut denomination: u32) -> Result<String, Strin
 #[test]
 fn test() {
     let s = to_basic_unit("0.0001037910", 7);
-    assert_eq!("00001038", s);
+    assert_eq!("00001038", s.unwrap());
 }

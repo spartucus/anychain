@@ -217,6 +217,7 @@ impl From<serde_json::error::Error> for TransactionError {
 }
 
 #[cfg(test)]
+#[cfg(feature = "alloc")]
 mod tests {
     use crate::func_selector;
 
